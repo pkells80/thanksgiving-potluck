@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8f2e8">
+<title>Thanksgiving Potluck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+:root{--cream:#faf6ef;--paper:#fffdf9;--ink:#422719;--muted:#786c60;--rust:#ad4318;--rust-dark:#87310f;--line:#e8ded1;--sage:#667653;--shadow:0 12px 34px #5b35100e}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+.hero{min-height:300px;display:flex;align-items:center;justify-content:center;text-align:center;padding:46px 20px 40px;background:linear-gradient(180deg,#f7ecda55,#f7ecda22),url('thanksgiving-header.png') center 43%/cover;position:relative;border-bottom:5px solid #a64a1b}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#fbf2e6d9 0%,#fbf2e6e8 28%,#fbf2e6ed 50%,#fbf2e6e8 72%,#fbf2e6d9 100%)}
+.hero-inner{position:relative;max-width:760px}.eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:.78rem;font-weight:800;color:var(--rust);margin:0 0 7px}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.7rem,7vw,5.5rem);font-weight:500;letter-spacing:-.055em;line-height:1.03;margin:0;color:#4a2817}
+.subtitle{font-size:clamp(.95rem,2vw,1.13rem);color:#5d493a;margin:18px auto 0;max-width:540px}.leafline{color:var(--rust);font-size:1.2rem;margin-top:12px;letter-spacing:.6rem}
+main{width:min(100% - 32px,980px);margin:26px auto 40px}.panel{background:var(--paper);border:1px solid #eee5d9;border-radius:20px;padding:clamp(20px,4vw,36px);box-shadow:var(--shadow)}
+.section-head{text-align:center;margin-bottom:23px}.section-head h2{font-family:Georgia,serif;font-weight:600;font-size:clamp(1.55rem,3vw,2rem);margin:0 0 5px}.section-head p{margin:0;color:var(--muted)}
+form{display:grid;grid-template-columns:1fr 1.25fr .85fr;gap:12px;align-items:end}.field label{display:block;font-size:.82rem;font-weight:750;margin:0 0 7px 2px;color:#594436}.field input,.field select{width:100%;height:50px;border:1px solid #ded5ca;background:white;border-radius:11px;padding:0 14px;color:var(--ink);font:inherit;outline:none}.field input:focus,.field select:focus{border-color:var(--rust);box-shadow:0 0 0 3px #ad43181c}.field input::placeholder{color:#a69a8f}
+button{border:0;border-radius:11px;cursor:pointer;font:inherit;font-weight:750;transition:transform .15s,background .15s}button:active{transform:translateY(1px)}button:disabled{opacity:.55;cursor:wait}.primary{height:50px;padding:0 20px;background:var(--rust);color:white;white-space:nowrap;grid-column:1/-1}.primary:hover{background:var(--rust-dark)}.form-note{font-size:.78rem;color:var(--muted);margin:13px 0 0;text-align:center}
+.menu{margin-top:34px}.menu-top{display:flex;justify-content:space-between;align-items:end;gap:14px;margin-bottom:17px}.menu-top h2{font-family:Georgia,serif;font-size:1.8rem;font-weight:600;margin:0}.menu-top p{margin:4px 0 0;color:var(--muted)}.count{font-size:.82rem;font-weight:750;color:var(--rust);background:#f4e5d4;padding:8px 12px;border-radius:999px;white-space:nowrap}
+.toolbar{display:flex;gap:10px;margin-bottom:14px}.search{flex:1;min-width:0;height:43px;border:1px solid var(--line);background:#fffdf9;border-radius:10px;padding:0 13px;font:inherit}.filter,.refresh{height:43px;border:1px solid var(--line);background:#fffdf9;border-radius:10px;padding:0 12px;font:inherit;color:var(--ink)}.refresh{color:var(--rust);font-weight:750}
+.entries{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.entry{display:flex;align-items:center;gap:13px;background:#f5efe5;border:1px solid #eee4d7;border-radius:13px;padding:13px 14px;min-width:0}.dish-icon{width:42px;height:42px;flex:0 0 42px;border-radius:50%;display:grid;place-items:center;background:#ad43181a;font-size:1.25rem}.entry-info{min-width:0;flex:1}.entry-name{font-weight:800;font-size:.94rem;overflow-wrap:anywhere}.entry-dish{font-size:.9rem;color:var(--muted);overflow-wrap:anywhere}.entry-category{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--sage);font-weight:800;margin-top:2px}
+.empty{grid-column:1/-1;text-align:center;padding:34px 18px;border:1px dashed #d9c8b5;border-radius:14px;color:var(--muted)}.empty .emoji{font-size:2rem;margin-bottom:7px}.empty strong{display:block;color:var(--ink);margin-bottom:4px}.status{font-size:.8rem;color:var(--muted);min-height:1.3em;margin:9px 2px 0}.status.error{color:#9a2f20}.footer{text-align:center;color:#89644e;font-family:Georgia,serif;font-style:italic;margin:30px 0 0}.footer span{color:var(--rust);padding:0 8px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#332319;color:white;padding:12px 18px;border-radius:12px;box-shadow:0 8px 25px #0002;opacity:0;pointer-events:none;transition:opacity .2s;max-width:calc(100% - 32px);text-align:center;z-index:5}.toast.show{opacity:1}
+@media(max-width:720px){form{grid-template-columns:1fr 1fr}.field:nth-child(2){grid-column:1/-1;grid-row:2}.field:nth-child(3){grid-column:1/-1;grid-row:3}.primary{grid-row:4}.entries{grid-template-columns:1fr}.hero{min-height:260px;background-position:center}.hero:before{background:#fbf2e6e0}.menu-top{align-items:start}.menu-top h2{font-size:1.55rem}}
+@media(max-width:420px){main{width:min(100% - 20px,980px);margin-top:14px}.panel{padding:18px 14px}.toolbar{flex-wrap:wrap}.search{flex-basis:100%}.menu-top{gap:8px}.count{font-size:.74rem;padding:7px 9px}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-inner">
+<p class="eyebrow">Gather • Give Thanks • Eat Well</p><h1>Thanksgiving</h1><div class="leafline">— ❧ —</div>
+<p class="subtitle">Good food. Great company. A little help from everyone.<br>Let's make this Thanksgiving delicious.</p>
+</div></header>
+<main>
+<section class="panel" aria-labelledby="form-title">
+<div class="section-head"><h2 id="form-title">What are you bringing?</h2><p>Add your name and dish so we can build the feast together.</p></div>
+<form id="signup-form">
+<div class="field"><label for="name">Your name</label><input id="name" name="name" maxlength="70" placeholder="e.g. Alex Morgan" autocomplete="name" required></div>
+<div class="field"><label for="dish">What you'll bring</label><input id="dish" name="dish" maxlength="100" placeholder="e.g. Grandma's apple pie" required></div>
+<div class="field"><label for="category">Category</label><select id="category" name="category"><option value="Side dish">Side dish</option><option value="Main dish">Main dish</option><option value="Appetizer">Appetizer</option><option value="Dessert">Dessert</option><option value="Drinks">Drinks</option><option value="Other">Other</option></select></div>
+<button class="primary" id="submit-button" type="submit">Add my dish <span aria-hidden="true">→</span></button>
+</form><p class="form-note">Your entry is shared with everyone visiting this page.</p><p id="status" class="status" role="status">Connecting to the shared menu…</p>
+</section>
+<section class="menu" aria-labelledby="menu-title">
+<div class="menu-top"><div><h2 id="menu-title">The Thanksgiving Menu</h2><p>Here's what everyone's bringing so far.</p></div><div class="count" id="count">Loading…</div></div>
+<div class="toolbar"><input class="search" id="search" type="search" placeholder="Search names or dishes…" aria-label="Search names or dishes"><select class="filter" id="filter" aria-label="Filter by category"><option value="All">All categories</option><option>Main dish</option><option>Side dish</option><option>Appetizer</option><option>Dessert</option><option>Drinks</option><option>Other</option></select><button class="refresh" id="refresh" type="button">↻ Refresh</button></div>
+<div class="entries" id="entries" aria-live="polite"><div class="empty"><div class="emoji">🍁</div><strong>Loading the menu…</strong>Please wait a moment.</div></div>
+</section>
+<p class="footer"><span>✦</span> Thankful for good food and even better company <span>✦</span></p>
+</main><div class="toast" id="toast" role="status"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+(() => {
+  const statusEl=document.querySelector('#status'), form=document.querySelector('#signup-form');
+  const nameInput=document.querySelector('#name'), dishInput=document.querySelector('#dish'), categoryInput=document.querySelector('#category');
+  const entriesEl=document.querySelector('#entries'), countEl=document.querySelector('#count'), searchEl=document.querySelector('#search'), filterEl=document.querySelector('#filter');
+  const submitBtn=document.querySelector('#submit-button'), refreshBtn=document.querySelector('#refresh'), toastEl=document.querySelector('#toast');
+  const icons={'Main dish':'🍗','Side dish':'🥘','Appetizer':'🧀','Dessert':'🥧','Drinks':'🥂','Other':'🍂'};
+  let entries=[], client=null, toastTimer=null;
+  function setStatus(message,isError=false){statusEl.textContent=message;statusEl.classList.toggle('error',isError)}
+  function notify(message){toastEl.textContent=message;toastEl.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove('show'),3000)}
+  function escapeHTML(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+  function render(){
+    const q=searchEl.value.trim().toLowerCase(), cat=filterEl.value;
+    const filtered=entries.filter(e=>(cat==='All'||e.category===cat)&&(!q||(e.name+' '+e.dish+' '+e.category).toLowerCase().includes(q)));
+    countEl.textContent=`${entries.length} ${entries.length===1?'dish':'dishes'} signed up`;
+    if(!filtered.length){entriesEl.innerHTML=`<div class="empty"><div class="emoji">🍁</div><strong>${entries.length?'No matching dishes just yet.':'The menu is waiting for you!'}</strong>${entries.length?'Try another search or category.':'Be the first to add something delicious.'}</div>`;return}
+    entriesEl.innerHTML=filtered.map(e=>`<article class="entry"><div class="dish-icon" aria-hidden="true">${icons[e.category]||'🍂'}</div><div class="entry-info"><div class="entry-name">${escapeHTML(e.name)}</div><div class="entry-dish">${escapeHTML(e.dish)}</div><div class="entry-category">${escapeHTML(e.category)}</div></div></article>`).join('');
+  }
+  async function loadEntries(showStatus=true){
+    if(!client){return}
+    if(showStatus)setStatus('Refreshing the shared menu…');
+    refreshBtn.disabled=true;
+    const {data,error}=await client.from('potluck_entries').select('id,name,dish,category,created_at').order('created_at',{ascending:true});
+    refreshBtn.disabled=false;
+    if(error){setStatus('Could not load entries. Check the Supabase setup and table permissions.',true);console.error(error);return}
+    entries=data||[];render();setStatus(`Shared menu updated at ${new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}.`);
+  }
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const name=nameInput.value.trim(),dish=dishInput.value.trim();
+    if(!name||!dish){notify('Please enter your name and dish.');return}
+    if(!client){notify('The shared menu is not configured yet.');return}
+    submitBtn.disabled=true;submitBtn.textContent='Adding…';
+    const {error}=await client.from('potluck_entries').insert({name,dish,category:categoryInput.value});
+    submitBtn.disabled=false;submitBtn.innerHTML='Add my dish <span aria-hidden="true">→</span>';
+    if(error){console.error(error);notify('Could not add your dish. Please try again.');setStatus('Submission failed. Check your connection and Supabase policies.',true);return}
+    form.reset();categoryInput.value='Side dish';await loadEntries(false);nameInput.focus();notify('Added to the shared menu!');setStatus('Your dish was added to the shared menu.');
+  });
+  searchEl.addEventListener('input',render);filterEl.addEventListener('change',render);refreshBtn.addEventListener('click',()=>loadEntries());
+  if(!window.supabase||!window.POTLUCK_CONFIG||!POTLUCK_CONFIG.url||!POTLUCK_CONFIG.anonKey||POTLUCK_CONFIG.url.includes('YOUR-PROJECT')||POTLUCK_CONFIG.anonKey.includes('YOUR-ANON')){
+    setStatus('Setup needed: add your Supabase project URL and publishable/anon key to config.js.',true);
+    entriesEl.innerHTML='<div class="empty"><div class="emoji">🛠️</div><strong>Almost ready!</strong>Finish the Supabase setup to load the shared menu.</div>';countEl.textContent='Not connected';return;
+  }
+  client=window.supabase.createClient(POTLUCK_CONFIG.url,POTLUCK_CONFIG.anonKey);
+  loadEntries();
+  // Poll periodically so visitors see additions made by other people.
+  setInterval(()=>loadEntries(false),20000);
+})();
+</script>
+</body></html>
