@@ -9,8 +9,26 @@
 <style>
 :root{--cream:#faf6ef;--paper:#fffdf9;--ink:#422719;--muted:#786c60;--rust:#ad4318;--rust-dark:#87310f;--line:#e8ded1;--sage:#667653;--shadow:0 12px 34px #5b35100e}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
-.hero{min-height:300px;display:flex;align-items:center;justify-content:center;text-align:center;padding:46px 20px 40px;background:linear-gradient(180deg,#f7ecda55,#f7ecda22),url('thanksgiving-header.png') center 43%/cover;position:relative;border-bottom:5px solid #a64a1b}
-.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#fbf2e6d9 0%,#fbf2e6e8 28%,#fbf2e6ed 50%,#fbf2e6e8 72%,#fbf2e6d9 100%)}
+.hero {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 46px 20px 40px;
+  background-color: #f8ecda;
+  background-image: url('thanksgiving-header.png');
+  background-position: center top;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  position: relative;
+  border-bottom: 5px solid #a64a1b;
+}
+
+.hero:before {
+  display: none;
+}
+ {content:"";position:absolute;inset:0;background:linear-gradient(90deg,#fbf2e6d9 0%,#fbf2e6e8 28%,#fbf2e6ed 50%,#fbf2e6e8 72%,#fbf2e6d9 100%)}
 .hero-inner{position:relative;max-width:760px}.eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:.78rem;font-weight:800;color:var(--rust);margin:0 0 7px}
 h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.7rem,7vw,5.5rem);font-weight:500;letter-spacing:-.055em;line-height:1.03;margin:0;color:#4a2817}
 .subtitle{font-size:clamp(.95rem,2vw,1.13rem);color:#5d493a;margin:18px auto 0;max-width:540px}.leafline{color:var(--rust);font-size:1.2rem;margin-top:12px;letter-spacing:.6rem}
